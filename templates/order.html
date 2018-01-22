@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}  {# 继承模板 #}
+
+{% block title %}
+    订单信息
+{% endblock title %}
+
+
+
+{% block content %}
+    {% for product,num in order.items %}
+        <p>{{ product }}:{{ num }}</p>
+    {% endfor %}
+
+{% endblock content %}

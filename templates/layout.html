@@ -1,0 +1,41 @@
+{% load staticfiles %}
+{% load rbac %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}模板{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'rbac/bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'rbac/menu.css' %}">
+    {% block css %} {% endblock css %}
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 menu">
+            {% block menu %}
+                {% menu_html request %}    {# 用inclusion_tag生成的menu_html #}
+            {% endblock menu %}
+        </div>
+        <div class="col-md-9">
+            {% block content %}
+            content
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+
+{% block script %}
+    <script src="{% static 'rbac/jquery-3.2.1.min.js' %}"></script>
+    <script>
+    $('.menu_first').click(function () {
+        $(this).parent().children('ul').addClass('hide');    //当前点击标签的父标签的所有子便签中的ul标签，添加hide属性；
+        $(this).next().removeClass('hide');    //下边相邻兄弟标签ul的hide属性被隐藏；
+    })
+    </script>
+{% endblock script %}
+</body>
+</html>

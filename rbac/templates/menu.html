@@ -1,0 +1,22 @@
+<div class="menu">
+    {% for k,menu in menu_dic.items %}
+        {# 一级菜单 #}
+        <div class="menu_first">{{ menu.menu_title }}</div>
+
+        {# 二级菜单(就是一级菜单下边的内容) #}
+        {% if menu.active %}
+            <ul class="">
+        {% else %}
+            <ul class="hide">
+        {% endif %}
+
+    {% for child in menu.children %}
+        {% if child.active %}
+            <li class="menu_second active"><a href="{{ child.permission_url }}">{{ child.permission__title }}</a></li>
+        {% else %}
+            <li class="menu_second"><a href="{{ child.permission_url }}">{{ child.permission__title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    {% endfor %}
+</div>

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}  {# 继承模板 #}
+
+{% block title %}
+    用户信息
+{% endblock title %}
+
+
+{# 菜单部分直接继承layout中的已经生成菜单的内容 #}
+
+
+
+{# 内容部分 #}
+{% block content %}
+    {% if page_permission.has_add %}
+        <a href="/userinfo/add/">添加</a>
+    {% endif %}
+
+    {% for user in users %}
+        <div>
+            {{ user.username }}
+            {{ user.email }}
+            {% if page_permission.has_edit %}
+                <a href="/userinfo/edit/{{ user.id }}">编辑</a>
+            {% endif %}
+            {% if page_permission.has_del %}
+                <a href="">删除</a>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+{% endblock content %}
